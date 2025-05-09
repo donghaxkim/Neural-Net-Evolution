@@ -7,8 +7,8 @@ reset_on_extinction  = False
 [DefaultGenome]
 # node activation options
 activation_default      = tanh
-activation_options     = tanh,relu,sigmoid,sin,gauss
-activation_mutate_rate = 0.1
+activation_options     = tanh
+activation_mutate_rate = 0.0
 
 # node aggregation options
 aggregation_default     = sum
@@ -55,10 +55,10 @@ conn_add_prob          = 0.5
 conn_delete_prob       = 0.5
 
 # network parameters
-num_inputs             = 23
+num_inputs             = 8
 num_hidden            = 0
 num_outputs           = 2
-initial_connection    = partial_direct 0.5
+initial_connection    = full
 feed_forward          = True
 
 # genome compatibility options

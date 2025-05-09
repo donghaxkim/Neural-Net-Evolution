@@ -2,6 +2,15 @@
 NEAT configuration for the neural network evolution simulation.
 """
 
+# Vision parameters
+VISION_ANGLE = np.pi / 2  # 90 degrees
+VISION_RANGE = 200
+VISION_SECTORS = 8
+
+# Memory parameters
+MEMORY_STEPS = 3
+MEMORY_SIZE = 4  # Size of each memory entry
+
 # NEAT configuration
 NEAT_CONFIG = """
 [NEAT]
@@ -13,13 +22,14 @@ reset_on_extinction  = False
 [DefaultGenome]
 # node activation options
 activation_default      = tanh
-activation_options     = tanh
+activation_options     = tanh,relu,sigmoid,sin,gauss
+activation_mutate_rate = 0.1
 
 # node add/remove rates
 node_add_prob           = 0.2
 node_delete_prob       = 0.2
 
-# node connection options
+# connection add/remove rates
 connection_add_prob    = 0.5
 connection_delete_prob = 0.5
 
@@ -51,6 +61,6 @@ FOOD_RADIUS = 5
 FOOD_ENERGY = 50
 FOOD_COUNT = 20
 
-# Neural network inputs
-NUM_INPUTS = 8  # Distance to nearest food, angle to food, current energy, etc.
-NUM_OUTPUTS = 2  # Movement direction and speed 
+# Neural network parameters
+NUM_INPUTS = VISION_SECTORS * 2 + 3 + (MEMORY_STEPS * MEMORY_SIZE)  # Vision sectors + energy + speed + angle + memory
+NUM_OUTPUTS = 2  # Movement direction and speed
